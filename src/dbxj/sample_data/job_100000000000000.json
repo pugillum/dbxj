@@ -1,0 +1,112 @@
+[
+  {
+    "job_run_id": 500000000000000,
+    "run_duration": 1756000,
+    "start_time": 1794979740000,
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "SUCCESS"
+      }
+    }
+  },
+  {
+    "job_run_id": 500000006363900,
+    "run_duration": 3540000,
+    "start_time": 1794895140000,
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "SUCCESS"
+      }
+    }
+  },
+  {
+    "job_run_id": 500000007613857,
+    "run_duration": 1376000,
+    "start_time": 1794808380000,
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "SUCCESS"
+      }
+    }
+  },
+  {
+    "job_run_id": 500000010463046,
+    "run_duration": 2635000,
+    "start_time": 1794722340000,
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "SUCCESS"
+      }
+    }
+  },
+  {
+    "job_run_id": 500000012320447,
+    "run_duration": 1702000,
+    "start_time": 1794635640000,
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "SUCCESS"
+      }
+    }
+  },
+  {
+    "job_run_id": 500000021057221,
+    "run_duration": 2339000,
+    "start_time": 1794549420000,
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "SUCCESS"
+      }
+    }
+  },
+  {
+    "job_run_id": 500000022726564,
+    "run_duration": 1156000,
+    "start_time": 1794462960000,
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "SUCCESS"
+      }
+    }
+  },
+  {
+    "job_run_id": 500000029348400,
+    "run_duration": 1974000,
+    "start_time": 1794376560000,
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "SUCCESS"
+      }
+    }
+  },
+  {
+    "job_run_id": 500000033531502,
+    "run_duration": 1902000,
+    "start_time": 1794290220000,
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "SUCCESS"
+      }
+    }
+  },
+  {
+    "job_run_id": 500000035086732,
+    "run_duration": 2889000,
+    "start_time": 1794203520000,
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "SUCCESS"
+      }
+    }
+  }
+]

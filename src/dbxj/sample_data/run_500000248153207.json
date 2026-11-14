@@ -1,0 +1,55 @@
+{
+  "tasks": [
+    {
+      "attempt_number": 1,
+      "cleanup_duration": 4000,
+      "cluster_instance": {
+        "cluster_id": "1117-060005-demo0005"
+      },
+      "execution_duration": 1132000,
+      "run_id": 500000248153208,
+      "setup_duration": 71000,
+      "status": {
+        "state": "TERMINATED",
+        "termination_details": {
+          "code": "SUCCESS"
+        }
+      },
+      "task_key": "aggregate"
+    },
+    {
+      "attempt_number": 1,
+      "cleanup_duration": 2000,
+      "cluster_instance": {
+        "cluster_id": "1117-060005-demo0005"
+      },
+      "execution_duration": 913000,
+      "run_id": 500000248153209,
+      "setup_duration": 51000,
+      "status": {
+        "state": "TERMINATED",
+        "termination_details": {
+          "code": "SUCCESS"
+        }
+      },
+      "task_key": "render_report"
+    },
+    {
+      "attempt_number": 1,
+      "cleanup_duration": 10000,
+      "cluster_instance": {
+        "cluster_id": "1117-060005-demo0005"
+      },
+      "execution_duration": 706000,
+      "run_id": 500000248153210,
+      "setup_duration": 90000,
+      "status": {
+        "state": "TERMINATED",
+        "termination_details": {
+          "code": "SUCCESS"
+        }
+      },
+      "task_key": "email"
+    }
+  ]
+}

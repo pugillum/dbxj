@@ -1,0 +1,21 @@
+{
+  "tasks": [
+    {
+      "attempt_number": 1,
+      "cleanup_duration": 8000,
+      "cluster_instance": {
+        "cluster_id": "1117-060003-demo0003"
+      },
+      "execution_duration": 644000,
+      "run_id": 500000142021076,
+      "setup_duration": 21000,
+      "status": {
+        "state": "TERMINATED",
+        "termination_details": {
+          "code": "SUCCESS"
+        }
+      },
+      "task_key": "vacuum_tables"
+    }
+  ]
+}

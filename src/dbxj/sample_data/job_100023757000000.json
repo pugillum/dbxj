@@ -1,0 +1,90 @@
+[
+  {
+    "job_run_id": 500000120413628,
+    "run_duration": 193000,
+    "start_time": 1794979260000,
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "USER_CANCELED"
+      }
+    }
+  },
+  {
+    "job_run_id": 500000121904221,
+    "run_duration": 1084000,
+    "start_time": 1794894780000,
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "SUCCESS"
+      }
+    }
+  },
+  {
+    "job_run_id": 500000127804657,
+    "run_duration": 254000,
+    "start_time": 1794808680000,
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "SUCCESS"
+      }
+    }
+  },
+  {
+    "job_run_id": 500000135946235,
+    "run_duration": 200000,
+    "start_time": 1794722340000,
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "USER_CANCELED"
+      }
+    }
+  },
+  {
+    "job_run_id": 500000140333349,
+    "run_duration": 492000,
+    "start_time": 1794635640000,
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "SUCCESS"
+      }
+    }
+  },
+  {
+    "job_run_id": 500000142021075,
+    "run_duration": 673000,
+    "start_time": 1794549360000,
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "SUCCESS"
+      }
+    }
+  },
+  {
+    "job_run_id": 500000145023317,
+    "run_duration": 1248000,
+    "start_time": 1794463140000,
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "SUCCESS"
+      }
+    }
+  },
+  {
+    "job_run_id": 500000148675603,
+    "run_duration": 645000,
+    "start_time": 1794376320000,
+    "status": {
+      "state": "TERMINATED",
+      "termination_details": {
+        "code": "SUCCESS"
+      }
+    }
+  }
+]
