@@ -1,0 +1,21 @@
+{
+  "tasks": [
+    {
+      "attempt_number": 1,
+      "cleanup_duration": 5000,
+      "cluster_instance": {
+        "cluster_id": "1117-060004-demo0004"
+      },
+      "execution_duration": 266000,
+      "run_id": 500000234309677,
+      "setup_duration": 8000,
+      "status": {
+        "state": "TERMINATED",
+        "termination_details": {
+          "code": "SUCCESS"
+        }
+      },
+      "task_key": "check_lag"
+    }
+  ]
+}

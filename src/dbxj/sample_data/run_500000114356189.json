@@ -1,0 +1,55 @@
+{
+  "tasks": [
+    {
+      "attempt_number": 1,
+      "cleanup_duration": 8000,
+      "cluster_instance": {
+        "cluster_id": "1117-060002-demo0002"
+      },
+      "execution_duration": 1024000,
+      "run_id": 500000114356190,
+      "setup_duration": 57000,
+      "status": {
+        "state": "TERMINATED",
+        "termination_details": {
+          "code": "SUCCESS"
+        }
+      },
+      "task_key": "prepare_data"
+    },
+    {
+      "attempt_number": 1,
+      "cleanup_duration": 1000,
+      "cluster_instance": {
+        "cluster_id": "1117-060002-demo0002"
+      },
+      "execution_duration": 851000,
+      "run_id": 500000114356191,
+      "setup_duration": 32000,
+      "status": {
+        "state": "TERMINATED",
+        "termination_details": {
+          "code": "SUCCESS"
+        }
+      },
+      "task_key": "train"
+    },
+    {
+      "attempt_number": 1,
+      "cleanup_duration": 1000,
+      "cluster_instance": {
+        "cluster_id": "1117-060002-demo0002"
+      },
+      "execution_duration": 806000,
+      "run_id": 500000114356192,
+      "setup_duration": 26000,
+      "status": {
+        "state": "TERMINATED",
+        "termination_details": {
+          "code": "SUCCESS"
+        }
+      },
+      "task_key": "evaluate"
+    }
+  ]
+}

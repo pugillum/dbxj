@@ -1,0 +1,104 @@
+/* keyboard-first like k9s: no scrollbars, narrow windows just clip and scroll via keys */
+* {
+    scrollbar-size: 0 0;
+}
+
+MainScreen {
+    layout: vertical;
+}
+
+SplashScreen {
+    align: center middle;
+    background: blue
+}
+
+Header {
+    height: 2;
+}
+
+FilterPanel {
+    height: 3;
+    border: solid white;
+}
+
+#filter_input {
+    height: 1;
+    border: none;
+}
+
+DataTablePlus {
+    border: solid white;
+    background: transparent;
+    height: 1fr;
+}
+
+Body {
+    height: 1fr;
+}
+
+#job_details {
+    width: 1fr;
+}
+
+ReauthScreen {
+    align: center middle;
+}
+
+#reauth_dialog {
+    width: 80;
+    background: $background;
+    height: auto;
+    max-height: 80%;
+    padding: 0 1;
+    border: solid white;
+    border-subtitle-align: right;
+}
+
+#reauth_error {
+    color: $text-muted;
+    margin-bottom: 1;
+}
+
+HelpScreen, ConfirmScreen {
+    align: center middle;
+}
+
+/* lazygit/k9s don't dim the view behind a popup */
+HelpScreen, ConfirmScreen, ReauthScreen {
+    background: transparent;
+}
+
+#help_dialog, #confirm_dialog {
+    width: auto;
+    background: $background;
+    height: auto;
+    max-width: 80%;
+    max-height: 80%;
+    padding: 0 1;
+    border: solid white;
+    border-subtitle-align: right;
+}
+
+#help_dialog > Static, #confirm_dialog > Static {
+    width: auto;
+}
+
+#confirm_dialog {
+    min-width: 40;
+}
+
+#status_bar {
+    dock: bottom;
+    height: 1;
+    background: $footer-background;
+}
+
+#status_bar Footer {
+    dock: none;
+    width: 1fr;
+}
+
+#status_message {
+    width: auto;
+    padding: 0 1;
+}

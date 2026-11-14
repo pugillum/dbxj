@@ -1,0 +1,4 @@
+{
+  "error": "AnalysisException: [TABLE_OR_VIEW_NOT_FOUND] The table or view `crm.contacts` cannot be found.",
+  "error_trace": "---------------------------------------------------------------------------\nAnalysisException                         Traceback (most recent call last)\nFile /Workspace/Repos/data/customer_360/build_features.py:42\n     40 def main():\n     41     spark = SparkSession.builder.getOrCreate()\n---> 42     contacts = spark.table(\"crm.contacts\")\n     43     orders = spark.table(\"sales.orders\")\n     44     features = build(contacts, orders)\n\nFile /databricks/spark/python/pyspark/sql/session.py:1667, in SparkSession.table(self, tableName)\n-> 1667     return DataFrame(self._jsparkSession.table(tableName), self)\n\nAnalysisException: [TABLE_OR_VIEW_NOT_FOUND] The table or view `crm.contacts` cannot be found.\nVerify the spelling and correctness of the schema and catalog."
+}

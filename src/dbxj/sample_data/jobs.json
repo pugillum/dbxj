@@ -1,0 +1,44 @@
+[
+  {
+    "job_id": 100000000000000,
+    "settings": {
+      "name": "daily_sales_ingest"
+    }
+  },
+  {
+    "job_id": 100007919000000,
+    "settings": {
+      "name": "customer_360_refresh"
+    }
+  },
+  {
+    "job_id": 100015838000000,
+    "settings": {
+      "name": "ml_churn_training"
+    }
+  },
+  {
+    "job_id": 100023757000000,
+    "settings": {
+      "name": "[dev] nightly_cleanup"
+    }
+  },
+  {
+    "job_id": 100031676000000,
+    "settings": {
+      "name": "hourly_events_stream_check"
+    }
+  },
+  {
+    "job_id": 100039595000000,
+    "settings": {
+      "name": "weekly_finance_report"
+    }
+  },
+  {
+    "job_id": 100047514000000,
+    "settings": {
+      "name": "adhoc_backfill"
+    }
+  }
+]

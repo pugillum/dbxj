@@ -1,0 +1,55 @@
+{
+  "tasks": [
+    {
+      "attempt_number": 1,
+      "cleanup_duration": 9000,
+      "cluster_instance": {
+        "cluster_id": "1117-060001-demo0001"
+      },
+      "execution_duration": 1003000,
+      "run_id": 500000074305873,
+      "setup_duration": 21000,
+      "status": {
+        "state": "TERMINATED",
+        "termination_details": {
+          "code": "SUCCESS"
+        }
+      },
+      "task_key": "extract"
+    },
+    {
+      "attempt_number": 1,
+      "cleanup_duration": 9000,
+      "cluster_instance": {
+        "cluster_id": "1117-060001-demo0001"
+      },
+      "execution_duration": 572000,
+      "run_id": 500000074305874,
+      "setup_duration": 26000,
+      "status": {
+        "state": "TERMINATED",
+        "termination_details": {
+          "code": "SUCCESS"
+        }
+      },
+      "task_key": "build_features"
+    },
+    {
+      "attempt_number": 1,
+      "cleanup_duration": 4000,
+      "cluster_instance": {
+        "cluster_id": "1117-060001-demo0001"
+      },
+      "execution_duration": 896000,
+      "run_id": 500000074305875,
+      "setup_duration": 82000,
+      "status": {
+        "state": "TERMINATED",
+        "termination_details": {
+          "code": "SUCCESS"
+        }
+      },
+      "task_key": "publish"
+    }
+  ]
+}
