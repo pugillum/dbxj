@@ -1,6 +1,8 @@
+from typing import ClassVar
+
 from rich.text import Text
 from textual.app import ComposeResult
-from textual.binding import Binding
+from textual.binding import Binding, BindingType
 from textual.containers import Vertical
 from textual.screen import ModalScreen
 from textual.widgets import Static
@@ -60,7 +62,7 @@ def help_text() -> Text:
 class HelpScreen(ModalScreen):
     """lazygit-style keybindings overlay."""
 
-    BINDINGS = [
+    BINDINGS: ClassVar[list[BindingType]] = [
         Binding("escape", "dismiss", "Close", show=False),
         Binding("question_mark", "dismiss", "Close", show=False),
         Binding("q", "dismiss", "Close", show=False),
@@ -74,7 +76,7 @@ class HelpScreen(ModalScreen):
 
 
 class ConfirmScreen(ModalScreen[bool]):
-    BINDINGS = [
+    BINDINGS: ClassVar[list[BindingType]] = [
         Binding("y", "confirm", "Confirm", show=False),
         Binding("enter", "confirm", "Confirm", show=False),
         Binding("n", "cancel", "Cancel", show=False),

@@ -20,7 +20,7 @@ jobs:
       - run: uv sync --locked
       - run: uv run ruff check
       - run: uv run ruff format --check
-      - run: uv run mypy src
+      - run: uv run ty check
       - run: uv run pytest
 
   # Tests only: lint/type tooling is floated too, so it stays in the locked job above.

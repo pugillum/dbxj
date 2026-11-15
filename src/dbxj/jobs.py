@@ -1,10 +1,10 @@
+from collections.abc import Iterator
+from dataclasses import dataclass
 from enum import Enum
 from itertools import islice
-from typing import Dict, Iterator, List
+
 from databricks.sdk import WorkspaceClient
 from databricks.sdk.service.jobs import RunLifecycleStateV2State, RunStatus, TerminationCodeCode
-
-from dataclasses import dataclass
 
 
 @dataclass
@@ -43,12 +43,11 @@ def classify_run(status: RunStatus | None) -> RunResult:
 
 
 class JobsAPI:
-    jobs: List[Job] = []
-
     def __init__(self, ws_client: WorkspaceClient):
         self.ws_client = ws_client
+        self.jobs: list[Job] = []
         # None marks a failed fetch, so it isn't retried until the job list is refreshed
-        self.recent_runs: Dict[int, List[RunResult] | None] = {}
+        self.recent_runs: dict[int, list[RunResult] | None] = {}
 
     def get_api_jobs(self) -> None:
         self.jobs = []
@@ -69,10 +68,9 @@ class JobsAPI:
     def get_jobs(self, clear_cache: bool = False) -> Iterator[Job]:
         if clear_cache:
             self.get_api_jobs()
-        for job in self.jobs:
-            yield job
+        yield from self.jobs
 
-    def get_recent_runs(self, job_id: int, n: int = 5) -> List[RunResult] | None:
+    def get_recent_runs(self, job_id: int, n: int = 5) -> list[RunResult] | None:
         """Results of the last n runs, oldest first, or None if the fetch failed.
         Cached until the job list is refreshed."""
         if job_id in self.recent_runs:

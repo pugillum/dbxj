@@ -3,24 +3,23 @@ import os
 import sys
 from argparse import ArgumentParser
 from importlib.metadata import version
-from typing import Optional
-from textual.app import App, ComposeResult
-from textual.binding import Binding
-from textual.containers import Horizontal
-from textual.notifications import SeverityLevel
-
-from textual.screen import Screen
-from textual.widget import Widget
-from textual import work
-from textual.timer import Timer
-from textual.widgets import Footer, Label, Static
+from typing import ClassVar
 
 from databricks.sdk import WorkspaceClient
+from textual import work
+from textual.app import App, ComposeResult
+from textual.binding import Binding, BindingType
+from textual.containers import Horizontal
+from textual.notifications import SeverityLevel
+from textual.screen import Screen
+from textual.timer import Timer
+from textual.widget import Widget
+from textual.widgets import Footer, Label, Static
 
 from dbxj.auth import AuthError, ReauthScreen, available_profiles, config_path, connect
-from dbxj.mock_workspace_client import get_mock_client
 from dbxj.body import Body
 from dbxj.dialogs import HelpScreen
+from dbxj.mock_workspace_client import get_mock_client
 
 
 class Header(Widget):
@@ -38,7 +37,11 @@ class Header(Widget):
 class StatusBar(Horizontal):
     """The bottom bar: key hints on the left, a brief status message on the right (like lazygit)."""
 
-    SEVERITY_STYLES = {"information": "green", "warning": "yellow", "error": "red"}
+    SEVERITY_STYLES: ClassVar[dict[str, str]] = {
+        "information": "green",
+        "warning": "yellow",
+        "error": "red",
+    }
     clear_timer: Timer | None = None
 
     def compose(self) -> ComposeResult:
@@ -57,7 +60,7 @@ class StatusBar(Horizontal):
 
 class MainScreen(Screen):
     ws_client: WorkspaceClient
-    BINDINGS = [
+    BINDINGS: ClassVar[list[BindingType]] = [
         Binding("r", "refresh", "Refresh"),
         Binding("q", "app.quit", "Quit"),
         Binding("question_mark", "help", "Help", key_display="?"),
@@ -115,7 +118,7 @@ class MainScreen(Screen):
 
 
 class SplashScreen(Screen):
-    BINDINGS = [
+    BINDINGS: ClassVar[list[BindingType]] = [
         ("q", "app.quit", "Quit the app"),
     ]
 
@@ -142,7 +145,7 @@ class DbxjApp(App):
     CSS_PATH = "main.tcss"
 
     def __init__(self, offline: bool = False, profile: str | None = None) -> None:
-        self.main_screen: Optional[MainScreen] = None
+        self.main_screen: MainScreen | None = None
         self.offline = offline
         self.profile = profile
 
@@ -160,10 +163,11 @@ class DbxjApp(App):
         title: str = "",
         severity: SeverityLevel = "information",
         timeout: float | None = None,
+        markup: bool = True,
     ) -> None:
         """Show notifications in the bottom bar rather than as Textual's toast overlays."""
         if self.main_screen is None or not self.main_screen.is_mounted:
-            super().notify(message, title=title, severity=severity, timeout=timeout)
+            super().notify(message, title=title, severity=severity, timeout=timeout, markup=markup)
             return
         if timeout is None:
             timeout = 8 if severity == "error" else 4
