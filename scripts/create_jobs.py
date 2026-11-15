@@ -1,5 +1,6 @@
-from databricks.sdk import WorkspaceClient
 import argparse
+
+from databricks.sdk import WorkspaceClient
 
 w = WorkspaceClient()
 

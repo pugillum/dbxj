@@ -3,6 +3,26 @@
 A log of working sessions on this project, newest first. Add an entry at the end of each session:
 the goal, what changed, decisions made, and anything left open.
 
+## 2026-11-15: ruff 0.17 lint fixes
+
+**Goal:** CI (and `main`) failed `ruff check`: ruff 0.17.4 in `uv.lock` enables more rules by
+default (pyupgrade, isort, bugbear-style), giving 39 errors.
+
+**Changes**
+- `ruff --fix` for the mechanical ones (`List`/`Optional` → `list`/`X | None`, import order).
+- `BINDINGS` / `SEVERITY_STYLES` annotated `ClassVar[...]`. `JobsAPI.jobs` moved from a shared
+  class attribute into `__init__`.
+- `load_job_runs` uses `islice` instead of a manual counter; `yield from` in `get_jobs`; the
+  filter `enter` branch in `Body.on_key` is a single `elif`.
+- The broad `except Exception` blocks in worker threads stay, marked `# noqa: BLE001` with the
+  reason. `scripts/` raise `RuntimeError`.
+- The ruff pre-commit hooks now run `uv run ruff` (local hooks) instead of `ruff-pre-commit`.
+
+**Decisions**
+- Pre-commit had passed because `ruff-pre-commit` installs its own ruff at its pinned `rev`
+  (`v0.14.0` at the time), separate from the venv's. Running ruff and ty from the venv keeps
+  pre-commit, `just check` and CI on the versions in `uv.lock`.
+
 ## 2026-11-15: mypy → ty
 
 **Goal:** pre-commit was failing on mypy after the package update. Switch the type checker to ty.

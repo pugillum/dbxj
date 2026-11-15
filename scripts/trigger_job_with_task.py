@@ -13,7 +13,7 @@ def main():
         w.jobs.run_now_and_wait(job_id)
     else:
         print("Job not found")
-        raise Exception("Job not found")
+        raise RuntimeError("Job not found")
 
 
 if __name__ == "__main__":

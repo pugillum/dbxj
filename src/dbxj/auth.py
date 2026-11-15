@@ -2,12 +2,13 @@ import os
 import subprocess
 from configparser import ConfigParser
 from pathlib import Path
+from typing import ClassVar
 
 from databricks.sdk import WorkspaceClient
 from rich.markup import escape
 from textual import work
 from textual.app import ComposeResult
-from textual.binding import Binding
+from textual.binding import Binding, BindingType
 from textual.containers import Vertical
 from textual.screen import ModalScreen
 from textual.widgets import Static
@@ -43,7 +44,7 @@ def connect(profile: str | None) -> tuple[WorkspaceClient, int, str]:
 class ReauthScreen(ModalScreen[bool]):
     """Runs `databricks auth login`, which opens the browser and waits for the login."""
 
-    BINDINGS = [
+    BINDINGS: ClassVar[list[BindingType]] = [
         Binding("enter", "retry", "Retry", show=False),
         Binding("r", "retry", "Retry", show=False),
         Binding("q", "quit", "Quit", show=False),

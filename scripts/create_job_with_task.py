@@ -1,13 +1,12 @@
 import argparse
 from pathlib import Path
-from typing import Optional
 
 from databricks.sdk import WorkspaceClient
+from databricks.sdk.service.jobs import SparkPythonTask, Task
 from databricks.sdk.service.workspace import ImportFormat, Language
-from databricks.sdk.service.jobs import Task, SparkPythonTask
 
 
-def get_job_id(w: WorkspaceClient, job_name: str) -> Optional[int]:
+def get_job_id(w: WorkspaceClient, job_name: str) -> int | None:
     for job in w.jobs.list():
         if job_name == job.settings.name:
             return job.job_id
