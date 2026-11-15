@@ -3,6 +3,20 @@
 A log of working sessions on this project, newest first. Add an entry at the end of each session:
 the goal, what changed, decisions made, and anything left open.
 
+## 2026-11-15: splash logo and app class rename
+
+**Goal:** the splash screen still spelled out the old name `dbxtui`.
+
+**Changes**
+- The splash logo in `main.py` now reads `dbxj`. It keeps the `d`, `b` and `x` glyphs and adds a
+  hand-drawn `j` with a descender, so the logo is 2 rows taller.
+- Renamed the app class `DatabricksTUI` → `DbxjApp` (`main.py`, tests, `docs/design.md`).
+
+**Decisions**
+- Loading stays as it is. The jobs list already loads behind the splash, which closes on
+  `Body.JobsInitialised`. The slow `Last 5` fetches still start afterwards and fill in live, so a
+  workspace with many jobs isn't held on the splash.
+
 ## 2026-11-14: prepare for public release
 
 **Goal:** make the repo fit to publish so others can install and use `dbxj`.

@@ -4,7 +4,7 @@ import pytest
 from textual.widgets import DataTable, Static
 
 from dbxj.body import Body, BodyState
-from dbxj.main import DatabricksTUI, MainScreen
+from dbxj.main import DbxjApp, MainScreen
 from dbxj.mock_workspace_client import data_dir
 
 
@@ -27,7 +27,7 @@ def test_bundled_data_is_used():
 
 
 async def test_drill_into_failed_task():
-    app = DatabricksTUI(offline=True)
+    app = DbxjApp(offline=True)
     async with app.run_test(size=(140, 40)) as pilot:
         await pilot.pause(0.5)
         assert isinstance(app.screen, MainScreen)

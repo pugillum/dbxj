@@ -27,7 +27,7 @@ It's built on [Textual](https://textual.textualize.io/) and the
   message on the right, like lazygit. The hints are only the essential keys (`r` refresh, `q` quit,
   `?` help). Every other binding uses `show=False` and is listed in the `?` help overlay. The `^p`
   command palette hint is hidden too, though `ctrl+p` still works.
-- **Feedback is a status message, never an overlay.** `DatabricksTUI.notify` is overridden, so every
+- **Feedback is a status message, never an overlay.** `DbxjApp.notify` is overridden, so every
   `notify()` call writes one line into the bottom bar instead of showing Textual's toast cards.
   Messages are green / yellow / red for information / warning / error and clear themselves after
   4s, or 8s for errors. Use a popup only when the user has to make a decision.
@@ -63,7 +63,7 @@ src/dbxj/
 1. `main()` parses `--profile` (default `DATABRICKS_CONFIG_PROFILE`), `--offline` (alias `--demo`)
    and `--version`. An unknown
    profile exits with the list from `~/.databrickscfg` (or `DATABRICKS_CONFIG_FILE`).
-2. `DatabricksTUI` pushes `MainScreen`, then `SplashScreen` on top.
+2. `DbxjApp` pushes `MainScreen`, then `SplashScreen` on top.
 3. `MainScreen.setup_client` (async worker) calls `auth.connect(profile)` in a thread. It builds a
    `WorkspaceClient` and calls `current_user.me()` / `get_workspace_id()` to prove the login is valid.
 4. On `AuthError` it awaits `ReauthScreen` (see below). If login succeeds it loops back to step 3;

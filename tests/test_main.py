@@ -45,7 +45,7 @@ class FakeApp:
 @pytest.fixture
 def fake_app(monkeypatch):
     FakeApp.instances = []
-    monkeypatch.setattr(main_module, "DatabricksTUI", FakeApp)
+    monkeypatch.setattr(main_module, "DbxjApp", FakeApp)
     monkeypatch.setattr(main_module, "available_profiles", lambda: ["DEFAULT", "dev"])
     monkeypatch.delenv("DATABRICKS_CONFIG_PROFILE", raising=False)
     return FakeApp.instances
