@@ -1,0 +1,41 @@
+name-template: "v$RESOLVED_VERSION"
+tag-template: "v$RESOLVED_VERSION"
+
+categories:
+  - title: Features
+    labels: [enhancement]
+  - title: Bug Fixes
+    labels: [bug]
+  - title: Documentation
+    labels: [documentation]
+  - title: Dependencies
+    labels: [dependencies]
+
+exclude-labels: [skip-changelog]
+
+change-template: "- $TITLE (#$NUMBER) @$AUTHOR"
+change-title-escapes: '\<*_&'
+
+version-resolver:
+  major:
+    labels: [major]
+  minor:
+    labels: [enhancement]
+  default: patch
+
+autolabeler:
+  - label: documentation
+    files:
+      - "docs/**"
+      - "*.md"
+  - label: bug
+    branch:
+      - '/^fix\/.+/'
+  - label: enhancement
+    branch:
+      - '/^feat\/.+/'
+
+template: |
+  ## Changes
+
+  $CHANGES
