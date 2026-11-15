@@ -3,6 +3,26 @@
 A log of working sessions on this project, newest first. Add an entry at the end of each session:
 the goal, what changed, decisions made, and anything left open.
 
+## 2026-11-15: mypy → ty
+
+**Goal:** pre-commit was failing on mypy after the package update. Switch the type checker to ty.
+
+**Changes**
+- Fixed the mypy failures first: `DbxjApp.notify` takes Textual's new `markup` argument, and
+  `src/dbxj/py.typed` marks the package as typed.
+- Replaced mypy with `ty` (pinned `ty==0.0.99` in the `dev` group) in pre-commit, `just check` and
+  CI. The hook runs `uv run ty check` on the whole project. This also removes the `--install-types`
+  noise ("No module named pip" in the uv venv).
+- `[tool.ty.src]` excludes `scripts/`, which pre-commit already skipped.
+- ty checks unannotated functions, which mypy skipped, so it found 4 errors in the tests: a
+  hand-built fake `ws_client` (now a `MagicMock`) and `None`-able SDK fields (now asserted).
+
+**Decisions**
+- Pin ty exactly: it's pre-1.0, so a new release can add rules and break CI.
+
+**Open**
+- `scripts/` has 8 ty errors (mostly `None`-able SDK fields) if it should be checked too.
+
 ## 2026-11-15: splash logo and app class rename
 
 **Goal:** the splash screen still spelled out the old name `dbxtui`.
