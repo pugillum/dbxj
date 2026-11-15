@@ -1,7 +1,6 @@
 # dbxj
 
-A keyboard-driven terminal UI for browsing Databricks jobs, their runs and task logs, in the
-spirit of k9s and lazygit.
+A keyboard-driven terminal UI for browsing Databricks jobs, their runs and task logs.
 
 ![dbxj showing a list of jobs with their last 5 run results](https://raw.githubusercontent.com/pugillum/dbxj/main/docs/screenshot.svg)
 
@@ -9,6 +8,8 @@ spirit of k9s and lazygit.
 - Drill into a job's runs, a run's tasks and a task's output or error trace
 - Filter jobs by name, trigger a job, open anything in the browser
 - Switch workspaces with `--profile`; re-login happens in-app when your session expires
+
+TUI is built with [Textual](https://textual.textualize.io/). 
 
 # Install
 
@@ -68,8 +69,6 @@ uv run pytest
   `src/dbxj/sample_data` (regenerate with `uv run scripts/generate_sample_data.py`)
 - `scripts/` has helpers to create, trigger and delete test jobs in a workspace
 - `docs/design.md` describes how the app is put together
-
-Releases are published to PyPI by pushing a `v*` tag.
 
 # License
 
