@@ -2,11 +2,10 @@ import json
 from dataclasses import dataclass
 from importlib.resources import files
 from pathlib import Path
-from typing import List
 from unittest.mock import MagicMock
 
-from databricks.sdk.service.jobs import RunLifecycleStateV2State, TerminationCodeCode
 from databricks.sdk import WorkspaceClient
+from databricks.sdk.service.jobs import RunLifecycleStateV2State, TerminationCodeCode
 
 
 @dataclass
@@ -57,7 +56,7 @@ class Task:
 # TODO: Fix this in comparison to JobRun
 @dataclass
 class Run:
-    tasks: List[Task]
+    tasks: list[Task]
 
 
 @dataclass

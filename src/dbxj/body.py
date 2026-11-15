@@ -1,18 +1,19 @@
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from enum import Enum
-from typing import Dict, List
+from itertools import islice
+from typing import ClassVar
 
 from databricks.sdk import WorkspaceClient
 from databricks.sdk.service.jobs import RunLifecycleStateV2State, TerminationCodeCode
 from rich.text import Text
-from textual import events, work, on
+from textual import events, on, work
 from textual.app import ComposeResult
-from textual.binding import Binding
+from textual.binding import Binding, BindingType
 from textual.containers import Vertical, VerticalScroll
 from textual.message import Message
 from textual.widget import Widget
-from textual.widgets import DataTable, Static, Input
+from textual.widgets import DataTable, Input, Static
 from textual.widgets.data_table import CellDoesNotExist, RowDoesNotExist
 from textual.worker import get_current_worker
 
@@ -28,7 +29,7 @@ RUN_SYMBOLS = {
 }
 
 
-def render_recent_runs(results: List[RunResult] | None) -> Text:
+def render_recent_runs(results: list[RunResult] | None) -> Text:
     """Oldest to newest, left padded with '-' when there are fewer than RECENT_RUNS runs.
     None means the fetch failed."""
     if results is None:
@@ -82,7 +83,7 @@ class FilterState(Enum):
 
 
 class DataTablePlus(DataTable, can_focus=True):
-    BINDINGS = [
+    BINDINGS: ClassVar[list[BindingType]] = [
         Binding("j", "cursor_down", "Down", show=False),
         Binding("k", "cursor_up", "Up", show=False),
         Binding("h", "scroll_left", "Scroll left", show=False),
@@ -95,7 +96,7 @@ class DataTablePlus(DataTable, can_focus=True):
 
 
 class VerticalScrollPlus(VerticalScroll):
-    BINDINGS = [
+    BINDINGS: ClassVar[list[BindingType]] = [
         Binding("j", "scroll_down", "Scroll down", show=False),
         Binding("k", "scroll_up", "Scroll up", show=False),
         Binding("d", "page_down", "Page down", show=False),
@@ -144,7 +145,7 @@ class Body(Widget):
     current_task_url: str | None = None
     workspace_id: int | None = None
     # run page URLs for rows in the runs and tasks tables, keyed by row key
-    row_urls: Dict[str, str]
+    row_urls: dict[str, str]
     data_table: DataTablePlus
     details_panel: Widget
     filter_panel: FilterPanel
@@ -213,13 +214,16 @@ class Body(Widget):
         elif event.key == "slash":
             if self.state == BodyState.JOBS:
                 self.show_filter()
-        elif event.key == "enter":
-            if self.state == BodyState.JOBS and self.filter_state == FilterState.TYPING:
-                event.stop()  # prevent row selection in table
-                self.data_table.focus()
-                self.job_filter = self.filter_panel.filter_input.value
-                self.filter_state = FilterState.SELECTING
-                self.filter_panel.set_select_message(f"Matches for '{self.job_filter}'")
+        elif (
+            event.key == "enter"
+            and self.state == BodyState.JOBS
+            and self.filter_state == FilterState.TYPING
+        ):
+            event.stop()  # prevent row selection in table
+            self.data_table.focus()
+            self.job_filter = self.filter_panel.filter_input.value
+            self.filter_state = FilterState.SELECTING
+            self.filter_panel.set_select_message(f"Matches for '{self.job_filter}'")
 
     def cursor_row_key(self) -> str | None:
         if self.data_table.row_count == 0:
@@ -300,7 +304,7 @@ class Body(Widget):
         try:
             # don't wait for the run to finish, only for it to be created
             run_id = self.ws_client.jobs.run_now(job_id=job_id).bind()["run_id"]
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001 - report any failure instead of crashing the worker
             self.app.call_from_thread(
                 self.notify, f"Failed to trigger {job_name}: {e}", severity="error"
             )
@@ -310,7 +314,7 @@ class Body(Widget):
         self.jobs_api.recent_runs.pop(job_id, None)
         try:
             cell = render_recent_runs(self.jobs_api.get_recent_runs(job_id, RECENT_RUNS))
-        except Exception:
+        except Exception:  # noqa: BLE001 - show the cell as failed
             cell = render_recent_runs(None)
         self.app.call_from_thread(self.set_recent_runs_cell, job_id, cell)
 
@@ -368,7 +372,7 @@ class Body(Widget):
             self.jobs_initialised = True
 
     @work(exclusive=True, thread=True, group="recent_runs")
-    def load_recent_runs(self, job_ids: List[int]) -> None:
+    def load_recent_runs(self, job_ids: list[int]) -> None:
         # One list_runs call per job (there's no batched public API); results fill in as they arrive
         worker = get_current_worker()
         with ThreadPoolExecutor(max_workers=8) as pool:
@@ -381,7 +385,7 @@ class Body(Widget):
                     return
                 try:
                     cell = render_recent_runs(future.result())
-                except Exception as e:
+                except Exception as e:  # noqa: BLE001 - show the cell as failed
                     self.log.warning(f"Recent runs for {futures[future]} failed: {e}")
                     cell = render_recent_runs(None)
                 self.app.call_from_thread(self.set_recent_runs_cell, futures[future], cell)
@@ -400,10 +404,8 @@ class Body(Widget):
         self.data_table.add_columns(*("Run ID", "Status", "Start Time", "Duration"))
         self.row_urls = {}
         limit = 25
-        count = 0
-        for r in self.ws_client.jobs.list_runs(job_id=job_id, limit=limit) or []:
-            if count >= limit:  # TODO: Replace when limit actually works
-                break
+        # TODO: drop islice when the API limit actually works
+        for r in islice(self.ws_client.jobs.list_runs(job_id=job_id, limit=limit) or [], limit):
             status = "Unknown"
             if r.status is None:
                 status = "Unknown"
@@ -423,7 +425,6 @@ class Body(Widget):
             )
             if url := getattr(r, "run_page_url", None):
                 self.row_urls[key] = url
-            count += 1
 
         self.app.call_from_thread(self.select_row, select_key)
         self.data_table.loading = False

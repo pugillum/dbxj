@@ -20,7 +20,7 @@ jobs:
       - run: uv sync --locked
       - run: uv run ruff check
       - run: uv run ruff format --check
-      - run: uv run mypy src
+      - run: uv run ty check
       - run: uv run pytest
 
   # Tests only: lint/type tooling is floated too, so it stays in the locked job above.
@@ -38,3 +38,12 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: uv sync ${{ matrix.sync-args }}
       - run: uv run pytest
+
+  # Single required check for the branch ruleset, so matrix changes don't need ruleset edits.
+  ci-ok:
+    if: always()
+    needs: [check, compat]
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 1
+        if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
