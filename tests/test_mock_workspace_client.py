@@ -39,6 +39,10 @@ def test_mock_client_bundled_data_is_consistent(tmp_path, monkeypatch):
     assert jobs
     for job in jobs:
         for run in client.jobs.list_runs(job_id=job.job_id):
-            for task in client.jobs.get_run(run.job_run_id).tasks:
+            assert run.job_run_id is not None
+            tasks = client.jobs.get_run(run.job_run_id).tasks
+            assert tasks is not None
+            for task in tasks:
                 assert task.task_key
+                assert task.run_id is not None
                 client.jobs.get_run_output(task.run_id)

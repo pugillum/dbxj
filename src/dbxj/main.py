@@ -160,10 +160,11 @@ class DbxjApp(App):
         title: str = "",
         severity: SeverityLevel = "information",
         timeout: float | None = None,
+        markup: bool = True,
     ) -> None:
         """Show notifications in the bottom bar rather than as Textual's toast overlays."""
         if self.main_screen is None or not self.main_screen.is_mounted:
-            super().notify(message, title=title, severity=severity, timeout=timeout)
+            super().notify(message, title=title, severity=severity, timeout=timeout, markup=markup)
             return
         if timeout is None:
             timeout = 8 if severity == "error" else 4

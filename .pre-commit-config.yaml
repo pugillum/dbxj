@@ -22,12 +22,10 @@ repos:
       - id: ruff-format
   - repo: local
     hooks:
-      - id: mypy
-        name: mypy
-        entry: mypy
+      - id: ty
+        name: ty
+        entry: uv run ty check
         language: system
         types: [python]
-        args:
-          - --install-types
-          - --non-interactive
+        pass_filenames: false
 exclude: 'scripts/.*'

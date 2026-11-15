@@ -5,6 +5,9 @@ run profile="":
 run_offline:
     uv run dbxj --offline
 
+pre_commit:
+    uv run pre-commit run --all-files
+
 setup_python:
     uv venv --python 3.11
     uv sync
@@ -32,7 +35,7 @@ check: # same as CI (locked deps)
     uv sync --locked
     uv run ruff check
     uv run ruff format --check
-    uv run mypy src
+    uv run ty check
     uv run pytest
 
 check_lowest: # oldest allowed dependency versions

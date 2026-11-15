@@ -9,7 +9,7 @@ A keyboard-driven terminal UI for browsing Databricks jobs, their runs and task 
 - Filter jobs by name, trigger a job, open anything in the browser
 - Switch workspaces with `--profile`; re-login happens in-app when your session expires
 
-TUI is built with [Textual](https://textual.textualize.io/). 
+TUI is built with [Textual](https://textual.textualize.io/).
 
 # Install
 

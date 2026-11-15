@@ -1,4 +1,5 @@
 import time
+from unittest.mock import MagicMock
 
 import pytest
 
@@ -83,6 +84,7 @@ def test_render_recent_runs_all_symbols():
 )
 def test_job_url(host, workspace_id, run_id, expected):
     body = Body()
-    body.ws_client = type("Client", (), {"config": type("Config", (), {"host": host})})()
+    body.ws_client = MagicMock()
+    body.ws_client.config.host = host
     body.workspace_id = workspace_id
     assert body.job_url(1, run_id) == expected
